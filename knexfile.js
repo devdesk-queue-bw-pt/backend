@@ -1,4 +1,4 @@
-const pgConnection = process.env.DATABASE_URL || 'postgresql://postgres@localhost/devDesk';
+const pgConnection = process.env.DATABASE_URL;
 
 module.exports = {
 
@@ -41,20 +41,20 @@ module.exports = {
     },
   },  
 
-  // production: {
-  //   client: 'postgresql',
-  //   connection: {
-  //     database: 'my_db',
-  //     user:     'devDesk',
-  //     password: 'passTheWord1'
-  //   },
-  //   pool: {
-  //     min: 2,
-  //     max: 10
-  //   },
-  //   migrations: {
-  //     tableName: 'knex_migrations'
-  //   }
-  // }
+  production: {
+    client: 'postgresql',
+    connection: {
+      database: 'my_db',
+      user:     'devDesk',
+      password: 'passTheWord1'
+    },
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      tableName: 'knex_migrations'
+    }
+  }
 
 };
