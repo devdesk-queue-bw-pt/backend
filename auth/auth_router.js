@@ -14,7 +14,7 @@ router.post('/register', (req, res) => {
 
   Users.add(userData)
     .then(user => { 
-      res.status(201).json(user);
+      res.status(201).json(res.body);
     })
     .catch(err => {
       res.status(500).json({ message: 'Failed to add new user' })
@@ -40,6 +40,16 @@ router.post('/login', (req, res) => {
     .catch(error => {
       res.status(500).json(error);
     });
+});
+
+router.get('/', (req, res) => {
+  Users.find()
+  .then(users => {
+    res.json(users);
+  })
+  .catch(err => {
+    res.status(500).json({ message: 'Failed to get users' });
+  });
 });
 
 function generateToken(user) {
