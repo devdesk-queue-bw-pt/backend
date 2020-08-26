@@ -22,10 +22,10 @@ exports.up = function(knex) {
           .notNullable();
       })
       .createTable('users_roles', tbl => {
-        tbl.text('user_id')
+        tbl.integer('user_id')
           .references('id')
           .inTable('users');
-        tbl.text('role_id')
+        tbl.integer('role_id')
           .references('id')
           .inTable('roles');        
       })
@@ -53,24 +53,24 @@ exports.up = function(knex) {
           .notNullable();       
       })
       .createTable('ticket_ticketStatus', tbl => {
-        tbl.text('ticket_id')
+        tbl.integer('ticket_id')
           .references('id')
           .inTable('tickets');
-        tbl.text('status_id')
+        tbl.integer('status_id')
           .references('id')
           .inTable('status');        
       })
       .createTable('ticket_resolver', tbl => {
-        tbl.text('ticket_id')
+        tbl.integer('ticket_id')
           .references('id')
           .inTable('tickets');
-        tbl.text('user_id')
+        tbl.integer('user_id')
           .references('id')
           .inTable('users');        
       })
       .createTable('comments', tbl => {
         tbl.increments();
-        tbl.text('description', 512)
+        tbl.text('comment', 512)
           .notNullable();
         tbl.integer('user_id')
           .unsigned()
@@ -88,6 +88,11 @@ exports.up = function(knex) {
   exports.down = function(knex) {
     return knex.schema
       .dropTableIfExists('comments')
+      .dropTableIfExists('ticket_resolver')
+      .dropTableIfExists('ticket_ticketStatus')
+      .dropTableIfExists('ticketStatus')
       .dropTableIfExists('tickets')
+      .dropTableIfExists('users_roles')
+      .dropTableIfExists('roles')
       .dropTableIfExists('users');
   };
