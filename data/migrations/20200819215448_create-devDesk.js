@@ -58,7 +58,7 @@ exports.up = function(knex) {
           .inTable('tickets');
         tbl.integer('status_id')
           .references('id')
-          .inTable('status');        
+          .inTable('ticketStatus');        
       })
       .createTable('ticket_resolver', tbl => {
         tbl.integer('ticket_id')
