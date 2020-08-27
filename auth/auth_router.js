@@ -14,7 +14,7 @@ router.post('/register', (req, res) => {
 
   Users.add(userData)
     .then(user => { 
-      res.status(201).json(res.body);
+      res.status(201).json(user);
     })
     .catch(err => {
       res.status(500).json({ message: 'Failed to add new user' })

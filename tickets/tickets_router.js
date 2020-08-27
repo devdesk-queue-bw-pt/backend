@@ -8,17 +8,15 @@ router.post('/submit', (req, res) => {
 
   Tickets.add(ticketData)
     .then(ticket => { 
-      res.status(201).json(res.body);
+      res.status(201).json(ticket);
     })
     .catch(err => {
       res.status(500).json({ message: 'Failed to submit ticket' })
     })
 });
 
-router.post('submit/comment', (req, res) => {
+router.post('/submit/comment', (req, res) => {
     const commentData = req.body;
-
-    console.log(commentData)
 
     Tickets.addComment(commentData)
         .then(comment => {

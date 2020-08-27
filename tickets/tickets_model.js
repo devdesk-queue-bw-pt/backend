@@ -5,14 +5,14 @@ module.exports = {
     find,
     findBy,
     addComment,
-    findComments
+    findComments    
 }
 
 function add(ticket) {
     return db('tickets')
         .insert(ticket)  
         .then(ids => {
-            return getById(ids[0]);
+            return getTicketById(ids[0]);
         });
 }
 
@@ -20,7 +20,7 @@ function addComment(comment) {
     return db('comments')
         .insert(comment)  
         .then(ids => {
-            return getById(ids[0]);
+            return getCommentById(ids[0]);
         });
 }
 
@@ -39,8 +39,14 @@ function findBy(username) {
     return db('tickets').where({ username }).first();
 }
 
-function getById(id) {
+function getTicketById(id) {
     return db('tickets')
+      .where({ id })
+      .first();
+}
+
+function getCommentById(id) {
+    return db('comments')
       .where({ id })
       .first();
 }

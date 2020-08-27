@@ -6,7 +6,7 @@ https://devdesklambda.herokuapp.com/
 Server Running Check
 GET /
 
-Register User (Helper and Student)
+### Register User (Helper and Student)
 POST /api/auth/register
 
 BODY
@@ -19,7 +19,19 @@ BODY
     "role": <role (integer) : defaults to student, student = 1, helper = 2>
 }
 
-User Login
+RETURNS
+
+{
+    "id": <username (string)>,
+    "title": <username (string)>,
+    "description": <username (string)>,
+    "steps_taken": <username (string)>,
+    "category": <username (string)>,
+    "status": <username (string)>,
+    "creator_id": <user (string)>
+}
+
+### User Login
 POST /api/auth/login
 
 BODY
@@ -32,6 +44,80 @@ BODY
 RETURNS
 
 {
-    "message": <welcome username (string)> ,
+    "message": <welcome name (string)> ,
     "token": <JWT token (string)>
+}
+
+### Create Ticket
+POST /api/tickets/submit
+
+BODY
+
+{
+    "title": <title (string)>,
+    "description": <description (string)>,
+    "steps_taken": <steps_taken (string)>,
+    "category": <category (string)>,
+    "status": <status (string)>,
+    "creator_id": <user_id of creator (integer)>
+}
+
+RETURNS
+
+{
+    "id": <id (integer)>,
+    "title": <title (string)>,
+    "description": <description (string)>,
+    "steps_taken": <steps_taken (string)>,
+    "category": <category (string)>,
+    "status": <status (string)>,
+    "creator_id": <user_id of creator (integer)>
+}
+
+### Get Tickets
+GET /api/tickets
+
+RETURNS array of all tickets
+
+{
+    "id": <id (integer)>,
+    "title": <title (string)>,
+    "description": <description (string)>,
+    "steps_taken": <steps_taken (string)>,
+    "category": <category (string)>,
+    "status": <status (string)>,
+    "creator_id": <user_id of creator (integer)>
+}
+
+### Add Comment
+POST /api/tickets/submit/comment
+
+BODY
+
+{
+    "comment": <comment (string)>,
+    "user_id": <user_id of ticket creator (integer)>,
+    "ticket_id": <ticket_id (integer)>
+}
+
+RETURNS
+
+{
+    "id": <id (integer)>,
+    "comment": <comment (string)>,
+    "user_id": <user_id of ticket creator (integer)>,
+    "ticket_id": <ticket_id (integer)>
+}
+
+### Get Comments
+
+GET /api/tickets/comments
+
+RETURNS array of all comments
+
+{
+    "id": <id (integer)>,
+    "comment": <comment (string)>,
+    "user_id": <user_id of ticket creator (integer)>,
+    "ticket_id": <ticket_id (integer)>
 }
