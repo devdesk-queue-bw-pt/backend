@@ -14,7 +14,7 @@ router.post('/register', (req, res) => {
 
   Users.add(userData)
     .then(user => { 
-      res.status(201).json(res.body);
+      res.status(201).json(user);
     })
     .catch(err => {
       res.status(500).json({ message: 'Failed to add new user' })
@@ -32,7 +32,7 @@ router.post('/login', (req, res) => {
       if (user && bcrypt.compareSync(password, user.password)) {
           // generate token and include in response
           const token = generateToken(user);
-          res.status(200).json({ message: `Welcome ${user.username}!`, token });
+          res.status(200).json({ message: `Welcome ${user.first_name}!`, token });
       } else {
           res.status(401).json({ message: 'Invalid Credentials' });
       }
