@@ -3,19 +3,14 @@ const db = require('../data/dbConfig');
 module.exports = {
     add,
     find,
-    findBy
+    findBy,
+    getById
 }
 
-async function add(user) {
-    // return db('users')
-    //     .insert(user)  
-        // .then(ids => ({ id: ids[0] })); 
-    
-    const [addUser] = await db('users')
-        .returning(['id', 'username'])
-        .insert(user);
-
-    return addUser;
+function add(user) {
+    return db('users')
+        .insert(user)  
+        .then(ids => ({ id: ids[0] })); 
 }
 
 function find() {
@@ -24,4 +19,10 @@ function find() {
 
 function findBy(username) {
     return db('users').where({ username }).first();
+}
+
+function getById(id) {
+    return db('users')
+      .where({ id })
+      .first();
 }

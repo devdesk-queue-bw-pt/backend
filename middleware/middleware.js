@@ -1,9 +1,12 @@
 module.exports = {
-    authenticate
+    authenticate,
+    validateRole
 }
 
 function authenticate() {
     const [authType, token] = req.headers.authorization.split(' ');
+
+    console.log(re.headers);
 
     if (token) {
         jwt.verify(token, secrets.jwtSecret, (err, decodedToken) => {
@@ -17,4 +20,8 @@ function authenticate() {
     } else {
         res.status(401).json({ message: 'No token found' })
     }
+}
+
+function validateRole() {
+
 }
