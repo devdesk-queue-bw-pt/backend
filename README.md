@@ -121,3 +121,23 @@ RETURNS array of all comments
     "user_id": <user_id of ticket creator (integer)>,
     "ticket_id": <ticket_id (integer)>
 }
+
+### Delete Tickets
+
+DELETE /api/tickets/:id
+
+RETURNS
+
+{
+    "message": <message (string)>
+}
+
+### Delete Comments
+
+DELETE /api/tickets/comments/:id
+
+RETURNS
+
+{
+    "message": <message (string)>
+}
