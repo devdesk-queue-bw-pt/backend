@@ -49,6 +49,46 @@ router.get('/comments', (req, res) => {
     });
 });
 
+router.put('/:id', (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
+
+  Tickets.getTicketById(id)
+  .then(ticket => {
+    if (ticket) {
+      Tickets.updateTicket(changes, id)
+      .then(updatedTicket => {
+        res.json(updatedTicket);
+      });
+    } else {
+      res.status(404).json({ message: 'Could not find ticket with given id' });
+    }
+  })
+  .catch (err => {
+    res.status(500).json({ message: 'Failed to update ticket' });
+  });
+});
+
+router.put('/comments/:id', (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
+
+  Tickets.getCommentById(id)
+  .then(comment => {
+    if (comment) {
+      Tickets.updateComment(changes, id)
+      .then(updatedComment => {
+        res.json(updatedComment);
+      });
+    } else {
+      res.status(404).json({ message: 'Could not find comment with given id' });
+    }
+  })
+  .catch (err => {
+    res.status(500).json({ message: 'Failed to update comment' });
+  });
+});
+
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
 

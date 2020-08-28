@@ -6,6 +6,10 @@ module.exports = {
     findBy,
     addComment,
     findComments,
+    getTicketById,
+    getCommentById,
+    updateTicket,
+    updateComment,
     deleteTicket,
     deleteComment  
 }
@@ -43,14 +47,32 @@ function findBy(username) {
 
 function getTicketById(id) {
     return db('tickets')
-      .where({ id })
-      .first();
+      .first()
+      .where({ id });
 }
 
 function getCommentById(id) {
     return db('comments')
-      .where({ id })
-      .first();
+      .first()
+      .where({ id })      
+}
+
+function updateTicket(changes, id) {
+    return db('tickets')
+        .where('id', Number(id))
+        .update(changes)
+        .then(ids => {
+            return db('tickets').where({ id: Number(id) });
+        })
+}
+
+function updateComment(changes, id) {
+    return db('comments')
+        .where('id', Number(id))
+        .update(changes)
+        .then(ids => {
+            return db('comments').where({ id: Number(id) });
+        })
 }
 
 function deleteTicket(id) {
