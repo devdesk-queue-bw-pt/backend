@@ -5,7 +5,9 @@ module.exports = {
     find,
     findBy,
     addComment,
-    findComments    
+    findComments,
+    deleteTicket,
+    deleteComment  
 }
 
 function add(ticket) {
@@ -49,4 +51,16 @@ function getCommentById(id) {
     return db('comments')
       .where({ id })
       .first();
+}
+
+function deleteTicket(id) {
+    return db('tickets')
+      .where('id', Number(id))
+      .del()
+}
+
+function deleteComment(id) {
+    return db('comments')
+      .where('id', Number(id))
+      .del()
 }
