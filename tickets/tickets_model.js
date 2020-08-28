@@ -14,12 +14,9 @@ module.exports = {
     deleteComment  
 }
 
-function add(ticket) {
-    return db('tickets')
-        .insert(ticket)  
-        .then(ids => {
-            return getTicketById(ids[0]);
-        });
+async function add(ticket) {
+    const [id] = await db('tickets').insert(ticket).returning('id');
+    return getTicketById(id);
 }
 
 function addComment(comment) {
