@@ -122,6 +122,58 @@ RETURNS array of all comments
     "ticket_id": <ticket_id (integer)>
 }
 
+### Update Ticket
+
+PUT /api/tickets/:id
+
+BODY
+
+{
+    "title": <title (string)>,
+    "description": <description (string)>,
+    "steps_taken": <steps_taken (string)>,
+    "category": <category (string)>,
+    "status": <status (string)>,
+    "creator_id": <user_id of creator (integer)>
+}
+
+RETURNS
+
+[
+    {
+        "id": <id (integer)>,
+        "title": <title (string)>,
+        "description": <description (string)>,
+        "steps_taken": <steps_taken (string)>,
+        "category": <category (string)>,
+        "status": <status (string)>,
+        "creator_id": <user_id of creator (integer)>
+    }
+]
+
+### Update Comment
+
+PUT /api/tickets/comments/:id
+
+BODY
+
+{
+    "comment": <comment (string)>,
+    "user_id": <user_id of ticket creator (integer)>,
+    "ticket_id": <ticket_id (integer)>
+}
+
+RETURNS
+
+[
+    {
+        "id": <id (integer)>,
+        "comment": <comment (string)>,
+        "user_id": <user_id of ticket creator (integer)>,
+        "ticket_id": <ticket_id (integer)>
+    }
+]
+
 ### Delete Tickets
 
 DELETE /api/tickets/:id
