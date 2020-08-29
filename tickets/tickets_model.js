@@ -21,7 +21,8 @@ async function add(ticket) {
 
 function addComment(comment) {
     return db('comments')
-        .insert(comment)  
+        .insert(comment)
+        .returning('id')
         .then(ids => {
             return getCommentById(ids[0]);
         });
